@@ -2,9 +2,8 @@ package io.github.guilhermepagio.microsservicos.springcloud.hrworker.resources;
 
 import io.github.guilhermepagio.microsservicos.springcloud.hrworker.entities.Worker;
 import io.github.guilhermepagio.microsservicos.springcloud.hrworker.repositories.WorkerRepository;
-import org.hibernate.jdbc.Work;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +15,11 @@ import java.util.List;
 @RequestMapping(value = "/workers")
 public class WorkerResource {
 
-    @Autowired
-    private WorkerRepository workerRepository;
+    private final WorkerRepository workerRepository;
+
+    WorkerResource(WorkerRepository workerRepository) {
+        this.workerRepository = workerRepository;
+    }
 
     @GetMapping
     public ResponseEntity<List<Worker>> findAll() {
@@ -26,7 +28,7 @@ public class WorkerResource {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Worker> findById(@PathVariable Long id) {
+    public ResponseEntity<Worker> findById(@PathVariable @NonNull Long id) {
         final Worker worker = workerRepository.findById(id).get();
         return ResponseEntity.ok(worker);
     }
