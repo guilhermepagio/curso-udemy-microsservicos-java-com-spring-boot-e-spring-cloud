@@ -1,0 +1,112 @@
+{
+  "info": {
+    "_postman_id": "b96571bb-2406-4dc3-b745-2dd2d1518d97",
+    "name": "curso-udemy-microsservicos-java-com-spring-boot-e-spring-cloud",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37821398"
+  },
+  "item": [
+    {
+      "name": "hr-worker",
+      "item": [
+        {
+          "name": "All workers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{hrWorkerUrlBase}}/workers",
+              "host": [
+                "{{hrWorkerUrlBase}}"
+              ],
+              "path": [
+                "workers"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Worker by id",
+          "request": {
+            "auth": {
+              "type": "noauth"
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{hrWorkerUrlBase}}/workers/1",
+              "host": [
+                "{{hrWorkerUrlBase}}"
+              ],
+              "path": [
+                "workers",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "hr-payroll",
+      "item": [
+        {
+          "name": "Payment",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{hrPayrollUrlBase}}/payments/1/days/30",
+              "host": [
+                "{{hrPayrollUrlBase}}"
+              ],
+              "path": [
+                "payments",
+                "1",
+                "days",
+                "30"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "hrWorkerUrlBase",
+      "value": ""
+    },
+    {
+      "key": "hrPayrollUrlBase",
+      "value": ""
+    }
+  ]
+}
