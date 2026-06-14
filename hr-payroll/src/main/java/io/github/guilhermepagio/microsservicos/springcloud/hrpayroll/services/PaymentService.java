@@ -3,32 +3,30 @@ package io.github.guilhermepagio.microsservicos.springcloud.hrpayroll.services;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import io.github.guilhermepagio.microsservicos.springcloud.hrpayroll.entities.Payment;
 import io.github.guilhermepagio.microsservicos.springcloud.hrpayroll.entities.Worker;
+import io.github.guilhermepagio.microsservicos.springcloud.hrpayroll.feignclients.WorkerFeignClient;
 
 @Service
 public class PaymentService {
 
-    @Value("${hr-worker.host}")
-    private String workerHost;
+    private final WorkerFeignClient workerFeignClient;
 
-    private final RestTemplate restTemplate;
-
-    PaymentService(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
+    PaymentService(WorkerFeignClient workerFeignClient) {
+        this.workerFeignClient = workerFeignClient;
     }
 
     public Payment getPayment(Long workerId, Integer days) {
         final Map<String, String> uriVariables = new HashMap<>();
         uriVariables.put("id", workerId.toString());
 
-        final Worker worker = restTemplate.getForObject("http://" + workerHost + "/workers/{id}",
-                Worker.class,
-                uriVariables);
+        final Worker worker = workerFeignClient.findById(workerId).getBody();
+
+        if (worker == null) {
+            throw new RuntimeException("Worker not found");
+        }
 
         return new Payment(worker.getName(), worker.getDailyIncome(), days);
     }
