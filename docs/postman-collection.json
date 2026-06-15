@@ -15,11 +15,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{hrWorkerUrlBase}}/workers",
+              "raw": "{{urlBase}}/hr-worker/workers",
               "host": [
-                "{{hrWorkerUrlBase}}"
+                "{{urlBase}}"
               ],
               "path": [
+                "hr-worker",
                 "workers"
               ]
             }
@@ -35,11 +36,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{hrWorkerUrlBase}}/workers/1",
+              "raw": "{{urlBase}}/hr-worker/workers/1",
               "host": [
-                "{{hrWorkerUrlBase}}"
+                "{{urlBase}}"
               ],
               "path": [
+                "hr-worker",
                 "workers",
                 "1"
               ]
@@ -58,11 +60,12 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{hrPayrollUrlBase}}/payments/1/days/30",
+              "raw": "{{urlBase}}/hr-payroll/payments/1/days/30",
               "host": [
-                "{{hrPayrollUrlBase}}"
+                "{{urlBase}}"
               ],
               "path": [
+                "hr-payroll",
                 "payments",
                 "1",
                 "days",
@@ -101,11 +104,7 @@
   ],
   "variable": [
     {
-      "key": "hrWorkerUrlBase",
-      "value": ""
-    },
-    {
-      "key": "hrPayrollUrlBase",
+      "key": "urlBase",
       "value": ""
     }
   ]
