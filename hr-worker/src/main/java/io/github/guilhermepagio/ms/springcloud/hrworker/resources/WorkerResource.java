@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
@@ -25,9 +26,20 @@ public class WorkerResource {
 
     private final WorkerRepository workerRepository;
 
+    @Value("${test.config}")
+    private String testConfig;
+
     WorkerResource(WorkerRepository workerRepository, Environment environment) {
         this.workerRepository = workerRepository;
         this.environment = environment;
+    }
+
+    @GetMapping(value = "/configs")
+    public ResponseEntity<Void> configs() {
+        logger.info("CONFIG-@VALUE = " + testConfig);
+        logger.info("CONFIG-ENVIRONMENT = " + environment.getProperty("test.config"));
+
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping
