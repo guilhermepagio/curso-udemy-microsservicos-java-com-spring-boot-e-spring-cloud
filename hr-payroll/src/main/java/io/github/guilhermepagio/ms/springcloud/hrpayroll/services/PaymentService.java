@@ -15,6 +15,10 @@ public class PaymentService {
     }
 
     public Payment getPayment(Long workerId, Integer days) {
+        if (workerId == null || days == null) {
+            throw new RuntimeException("Worker ID and days must not be null");
+        }
+
         final Worker worker = workerFeignClient.findById(workerId).getBody();
 
         if (worker == null) {
