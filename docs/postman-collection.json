@@ -15,9 +15,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBase}}/hr-worker/workers",
+              "raw": "{{urlBaseGatewayZuul}}/hr-worker/workers",
               "host": [
-                "{{urlBase}}"
+                "{{urlBaseGatewayZuul}}"
               ],
               "path": [
                 "hr-worker",
@@ -36,14 +36,52 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBase}}/hr-worker/workers/1",
+              "raw": "{{urlBaseGatewayZuul}}/hr-worker/workers/1",
               "host": [
-                "{{urlBase}}"
+                "{{urlBaseGatewayZuul}}"
               ],
               "path": [
                 "hr-worker",
                 "workers",
                 "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Show worker configs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlBaseGatewayZuul}}/hr-worker/workers/configs",
+              "host": [
+                "{{urlBaseGatewayZuul}}"
+              ],
+              "path": [
+                "hr-worker",
+                "workers",
+                "configs"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Actuator refresh",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{urlBaseGatewayZuul}}/hr-worker/actuator/refresh",
+              "host": [
+                "{{urlBaseGatewayZuul}}"
+              ],
+              "path": [
+                "hr-worker",
+                "actuator",
+                "refresh"
               ]
             }
           },
@@ -60,9 +98,9 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBase}}/hr-payroll/payments/1/days/30",
+              "raw": "{{urlBaseGatewayZuul}}/hr-payroll/payments/1/days/30",
               "host": [
-                "{{urlBase}}"
+                "{{urlBaseGatewayZuul}}"
               ],
               "path": [
                 "hr-payroll",
@@ -70,6 +108,47 @@
                 "1",
                 "days",
                 "30"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "hr-config-server",
+      "item": [
+        {
+          "name": "hr-worker configs default profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlBaseConfigServer}}/hr-worker/default",
+              "host": [
+                "{{urlBaseConfigServer}}"
+              ],
+              "path": [
+                "hr-worker",
+                "default"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "hr-worker configs test profile",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{urlBaseConfigServer}}/hr-worker/test",
+              "host": [
+                "{{urlBaseConfigServer}}"
+              ],
+              "path": [
+                "hr-worker",
+                "test"
               ]
             }
           },
@@ -104,7 +183,11 @@
   ],
   "variable": [
     {
-      "key": "urlBase",
+      "key": "urlBaseGatewayZuul",
+      "value": ""
+    },
+    {
+      "key": "urlBaseConfigServer",
       "value": ""
     }
   ]
