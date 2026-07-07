@@ -1,0 +1,108 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrConfigServerApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hrconfigserver.HrConfigServerApplication",
+      "projectName": "hr-config-server",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10001 -Dcom.sun.management.jmxremote.rmi.port=10001 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrEurekaServerApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hreurekaserver.HrEurekaServerApplication",
+      "projectName": "hr-eureka-server",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10002 -Dcom.sun.management.jmxremote.rmi.port=10002 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrApiGatewayZuulApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hrapigatewayzuul.HrApiGatewayZuulApplication",
+      "projectName": "hr-api-gateway-zuul",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10003 -Dcom.sun.management.jmxremote.rmi.port=10003 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrOauthApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hroauth.HrOauthApplication",
+      "projectName": "hr-oauth",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10004 -Dcom.sun.management.jmxremote.rmi.port=10004 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrPayrollApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hrpayroll.HrPayrollApplication",
+      "projectName": "hr-payroll",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10005 -Dcom.sun.management.jmxremote.rmi.port=10005 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrWorkerApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hrworker.HrWorkerApplication",
+      "projectName": "hr-worker",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10006 -Dcom.sun.management.jmxremote.rmi.port=10006 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    },
+    {
+      "type": "java",
+      "name": "🟢 HrUserApplication",
+      "request": "launch",
+      "mainClass": "io.github.guilhermepagio.ms.springcloud.hruser.HrUserApplication",
+      "projectName": "hr-user",
+      "console": "internalConsole",
+      "vmArgs": "-Dcom.sun.management.jmxremote.port=10007 -Dcom.sun.management.jmxremote.rmi.port=10007 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "⚙️ Start Infra Microservices",
+      "configurations": [
+        "🟢 HrConfigServerApplication",
+        "🟢 HrEurekaServerApplication",
+        "🟢 HrApiGatewayZuulApplication",
+        "🟢 HrOauthApplication"
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "📦 Start Resources Microservices",
+      "configurations": [
+        "🟢 HrWorkerApplication",
+        "🟢 HrUserApplication",
+        "🟢 HrPayrollApplication"
+      ],
+      "stopAll": true
+    },
+    {
+      "name": "🚀 Start All Microservices",
+      "configurations": [
+        "🟢 HrConfigServerApplication",
+        "🟢 HrEurekaServerApplication",
+        "🟢 HrApiGatewayZuulApplication",
+        "🟢 HrOauthApplication",
+        "🟢 HrWorkerApplication",
+        "🟢 HrUserApplication",
+        "🟢 HrPayrollApplication"
+      ],
+      "stopAll": true
+    }
+  ]
+}
