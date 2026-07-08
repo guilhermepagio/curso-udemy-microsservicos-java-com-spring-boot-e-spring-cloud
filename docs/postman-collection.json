@@ -12,12 +12,22 @@
         {
           "name": "All workers",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBaseGatewayZuul}}/hr-worker/workers",
+              "raw": "{{url-base-gateway-zuul}}/hr-worker/workers",
               "host": [
-                "{{urlBaseGatewayZuul}}"
+                "{{url-base-gateway-zuul}}"
               ],
               "path": [
                 "hr-worker",
@@ -31,14 +41,21 @@
           "name": "Worker by id",
           "request": {
             "auth": {
-              "type": "noauth"
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
             },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBaseGatewayZuul}}/hr-worker/workers/1",
+              "raw": "{{url-base-gateway-zuul}}/hr-worker/workers/1",
               "host": [
-                "{{urlBaseGatewayZuul}}"
+                "{{url-base-gateway-zuul}}"
               ],
               "path": [
                 "hr-worker",
@@ -52,12 +69,22 @@
         {
           "name": "Show worker configs",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBaseGatewayZuul}}/hr-worker/workers/configs",
+              "raw": "{{url-base-gateway-zuul}}/hr-worker/workers/configs",
               "host": [
-                "{{urlBaseGatewayZuul}}"
+                "{{url-base-gateway-zuul}}"
               ],
               "path": [
                 "hr-worker",
@@ -71,12 +98,22 @@
         {
           "name": "Actuator refresh",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "POST",
             "header": [],
             "url": {
-              "raw": "{{urlBaseGatewayZuul}}/hr-worker/actuator/refresh",
+              "raw": "{{url-base-gateway-zuul}}/hr-worker/actuator/refresh",
               "host": [
-                "{{urlBaseGatewayZuul}}"
+                "{{url-base-gateway-zuul}}"
               ],
               "path": [
                 "hr-worker",
@@ -95,12 +132,22 @@
         {
           "name": "Payment",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBaseGatewayZuul}}/hr-payroll/payments/1/days/30",
+              "raw": "{{url-base-gateway-zuul}}/hr-payroll/payments/1/days/30",
               "host": [
-                "{{urlBaseGatewayZuul}}"
+                "{{url-base-gateway-zuul}}"
               ],
               "path": [
                 "hr-payroll",
@@ -121,12 +168,22 @@
         {
           "name": "hr-worker configs default profile",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBaseConfigServer}}/hr-worker/default",
+              "raw": "{{url-base-config-server}}/hr-worker/default",
               "host": [
-                "{{urlBaseConfigServer}}"
+                "{{url-base-config-server}}"
               ],
               "path": [
                 "hr-worker",
@@ -139,16 +196,208 @@
         {
           "name": "hr-worker configs test profile",
           "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{urlBaseConfigServer}}/hr-worker/test",
+              "raw": "{{url-base-config-server}}/hr-worker/test",
               "host": [
-                "{{urlBaseConfigServer}}"
+                "{{url-base-config-server}}"
               ],
               "path": [
                 "hr-worker",
                 "test"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "hr-user",
+      "item": [
+        {
+          "name": "User by id",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url-base-gateway-zuul}}/hr-user/users/2",
+              "host": [
+                "{{url-base-gateway-zuul}}"
+              ],
+              "path": [
+                "hr-user",
+                "users",
+                "2"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "User by email",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url-base-gateway-zuul}}/hr-user/users/search?email=leia@gmail.com",
+              "host": [
+                "{{url-base-gateway-zuul}}"
+              ],
+              "path": [
+                "hr-user",
+                "users",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "leia@gmail.com"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "hr-oauth",
+      "item": [
+        {
+          "name": "User by email",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{token}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url-base-gateway-zuul}}/hr-oauth/users/search?email=leia@gmail.com",
+              "host": [
+                "{{url-base-gateway-zuul}}"
+              ],
+              "path": [
+                "hr-oauth",
+                "users",
+                "search"
+              ],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "leia@gmail.com"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code >= 200 && pm.response.code < 300) {\r",
+                  "    var json = JSON.parse(pm.response.text());\r",
+                  "    pm.environment.set(\"token\", json.access_token);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "password",
+                  "value": "{{client-secret}}",
+                  "type": "string"
+                },
+                {
+                  "key": "username",
+                  "value": "{{client-name}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "username",
+                  "value": "{{username}}",
+                  "type": "text",
+                  "uuid": "2cffe83a-6848-436b-a459-d9b741dc038e"
+                },
+                {
+                  "key": "password",
+                  "value": "123456",
+                  "type": "text",
+                  "uuid": "b6b7e94e-956c-49c1-b33a-ee21d75e67de"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "password",
+                  "type": "text",
+                  "uuid": "2c41d17e-449b-4ae2-bd82-f177e625f82c"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{url-base-gateway-zuul}}/hr-oauth/oauth/token",
+              "host": [
+                "{{url-base-gateway-zuul}}"
+              ],
+              "path": [
+                "hr-oauth",
+                "oauth",
+                "token"
               ]
             }
           },
@@ -179,16 +428,6 @@
           ""
         ]
       }
-    }
-  ],
-  "variable": [
-    {
-      "key": "urlBaseGatewayZuul",
-      "value": ""
-    },
-    {
-      "key": "urlBaseConfigServer",
-      "value": ""
     }
   ]
 }

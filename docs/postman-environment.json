@@ -1,0 +1,46 @@
+{
+	"id": "f6a0288f-37e2-4a1c-92b7-fbea98b4b0ea",
+	"name": "curso-udemy-microsservicos-java-com-spring-boot-e-spring-cloud",
+	"values": [
+		{
+			"key": "url-base-gateway-zuul",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "url-base-config-server",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "client-name",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "client-secret",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "username",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "token",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"color": null,
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2026-07-08T21:15:18.748Z",
+	"_postman_exported_using": "Postman/12.18.3"
+}

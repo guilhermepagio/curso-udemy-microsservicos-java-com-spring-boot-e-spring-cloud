@@ -70,39 +70,5 @@
       "console": "internalConsole",
       "vmArgs": "-Dcom.sun.management.jmxremote.port=10007 -Dcom.sun.management.jmxremote.rmi.port=10007 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false"
     }
-  ],
-  "compounds": [
-    {
-      "name": "⚙️ Start Infra Microservices",
-      "configurations": [
-        "🟢 HrConfigServerApplication",
-        "🟢 HrEurekaServerApplication",
-        "🟢 HrApiGatewayZuulApplication",
-        "🟢 HrOauthApplication"
-      ],
-      "stopAll": true
-    },
-    {
-      "name": "📦 Start Resources Microservices",
-      "configurations": [
-        "🟢 HrWorkerApplication",
-        "🟢 HrUserApplication",
-        "🟢 HrPayrollApplication"
-      ],
-      "stopAll": true
-    },
-    {
-      "name": "🚀 Start All Microservices",
-      "configurations": [
-        "🟢 HrConfigServerApplication",
-        "🟢 HrEurekaServerApplication",
-        "🟢 HrApiGatewayZuulApplication",
-        "🟢 HrOauthApplication",
-        "🟢 HrWorkerApplication",
-        "🟢 HrUserApplication",
-        "🟢 HrPayrollApplication"
-      ],
-      "stopAll": true
-    }
   ]
 }
