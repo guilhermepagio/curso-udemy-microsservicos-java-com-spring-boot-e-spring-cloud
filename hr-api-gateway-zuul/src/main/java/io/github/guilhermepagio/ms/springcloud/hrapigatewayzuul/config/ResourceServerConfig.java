@@ -1,6 +1,7 @@
 package io.github.guilhermepagio.ms.springcloud.hrapigatewayzuul.config;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -66,7 +67,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Bean
     FilterRegistrationBean<CorsFilter> corsFilter() {
         FilterRegistrationBean<CorsFilter> bean = new FilterRegistrationBean<>(
-                new CorsFilter(corsConfigurationSource()));
+                new CorsFilter(Objects.requireNonNull(corsConfigurationSource())));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
         return bean;
     }
