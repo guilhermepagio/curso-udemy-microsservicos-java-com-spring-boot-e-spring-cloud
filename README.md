@@ -14,7 +14,7 @@
 
 ---
 
-## 📑 Índice
+# 📑 Índice
 
 - [🏛️ Arquitetura](#️-arquitetura)
 - [🧩 Módulos do Projeto](#-módulos-do-projeto)
@@ -31,11 +31,11 @@
 
 ---
 
-## 🏛️ Arquitetura
+# 🏛️ Arquitetura
 
 O projeto segue o padrão de arquitetura de microsserviços, onde cada serviço possui responsabilidade isolada e se comunica via REST. Toda a infraestrutura é orquestrada por componentes do Spring Cloud.
 
-### Diagrama Geral
+## Diagrama Geral
 
 ```mermaid
 graph TB
@@ -97,7 +97,7 @@ graph TB
     style HO fill:#f44336,stroke:#b71c1c,color:#fff
 ```
 
-### Fluxo de Autenticação
+## Fluxo de Autenticação
 
 ```mermaid
 sequenceDiagram
@@ -123,7 +123,7 @@ sequenceDiagram
     GW-->>C: 200 OK - Lista de workers
 ```
 
-### Fluxo de Cálculo de Pagamento (com Circuit Breaker)
+## Fluxo de Cálculo de Pagamento (com Circuit Breaker)
 
 ```mermaid
 sequenceDiagram
@@ -152,7 +152,7 @@ sequenceDiagram
 
 ---
 
-## 🧩 Módulos do Projeto
+# 🧩 Módulos do Projeto
 
 O projeto é organizado como um **multi-module Maven** com um POM pai (`hr-parent`) que centraliza versões e dependências comuns.
 
@@ -170,9 +170,9 @@ O projeto é organizado como um **multi-module Maven** com um POM pai (`hr-paren
 
 ---
 
-## ⚙️ Stack Tecnológica
+# ⚙️ Stack Tecnológica
 
-### Core
+## Core
 
 | Tecnologia | Versão | Função |
 |-----------|--------|--------|
@@ -181,7 +181,7 @@ O projeto é organizado como um **multi-module Maven** com um POM pai (`hr-paren
 | **Spring Cloud** | Hoxton.SR12 | Ecossistema para arquitetura distribuída |
 | **Maven** | 3.x | Build e gerenciamento de dependências (multi-module) |
 
-### Spring Cloud Components
+## Spring Cloud Components
 
 | Componente | Dependência Maven | Onde é usado | Finalidade |
 |-----------|-------------------|--------------|-----------|
@@ -195,7 +195,7 @@ O projeto é organizado como um **multi-module Maven** com um POM pai (`hr-paren
 | **OAuth2** | `spring-cloud-starter-oauth2` | hr-oauth, hr-gateway | Autenticação e autorização com JWT |
 | **Ribbon** | (embutido no Zuul/Feign) | hr-gateway, hr-payroll | Client-side load balancing |
 
-### Persistência
+## Persistência
 
 | Tecnologia | Versão | Onde é usado | Finalidade |
 |-----------|--------|--------------|-----------|
@@ -203,7 +203,7 @@ O projeto é organizado como um **multi-module Maven** com um POM pai (`hr-paren
 | **PostgreSQL** | 12-alpine | hr-worker (prod), hr-user (prod/dev) | Banco de dados relacional em produção |
 | **H2 Database** | 2.2.220 | hr-worker (dev/test), hr-user (dev/test) | Banco in-memory para desenvolvimento |
 
-### Ferramentas e Utilitários
+## Ferramentas e Utilitários
 
 | Tecnologia | Finalidade |
 |-----------|-----------|
@@ -214,11 +214,11 @@ O projeto é organizado como um **multi-module Maven** com um POM pai (`hr-paren
 
 ---
 
-## 🔧 Configuração Centralizada & Profiles
+# 🔧 Configuração Centralizada & Profiles
 
 O **hr-config-server** é o coração da configuração. Ele busca arquivos `.properties` de um diretório `configs/` no repositório Git e os distribui aos microsserviços clientes via HTTP.
 
-### Como funciona
+## Como funciona
 
 ```mermaid
 graph LR
@@ -231,7 +231,7 @@ graph LR
     style CS fill:#ff9800,stroke:#e65100,color:#000
 ```
 
-### Propriedades Globais (`application.properties`)
+## Propriedades Globais (`application.properties`)
 
 Compartilhadas por **todos** os microsserviços clientes que consultam o Config Server:
 
@@ -241,9 +241,9 @@ Compartilhadas por **todos** os microsserviços clientes que consultam o Config 
 | `oauth.client.secret` | `myappsecret123` | Secret do cliente OAuth2 |
 | `jwt.secret` | `MY-SECRET-KEY` | Chave de assinatura JWT |
 
-### Profiles Disponíveis
+## Profiles Disponíveis
 
-#### 🟢 `hr-worker`
+### 🟢 `hr-worker`
 
 | Profile | Banco | Host DB | Porta DB | Banco de Dados | DDL Auto | Detalhes |
 |---------|-------|---------|----------|----------------|----------|----------|
@@ -252,7 +252,7 @@ Compartilhadas por **todos** os microsserviços clientes que consultam o Config 
 | **dev** | PostgreSQL | `localhost` | `5432` | `db_hr_worker` | `none` | Gera script DDL em `hr-worker/create.sql` |
 | **prod** | PostgreSQL | `hr-worker-pg12` | `5432` | `db_hr_worker` | `none` | Conecta ao container Docker `hr-worker-pg12` |
 
-#### 🟢 `hr-user`
+### 🟢 `hr-user`
 
 | Profile | Banco | Host DB | Porta DB | Banco de Dados | DDL Auto | Detalhes |
 |---------|-------|---------|----------|----------------|----------|----------|
@@ -260,7 +260,7 @@ Compartilhadas por **todos** os microsserviços clientes que consultam o Config 
 | **dev** | PostgreSQL | `localhost` | `5433` | `db_hr_user` | `none` | Gera script DDL em `hr-user/create.sql`. Porta `5433` (diferente do hr-worker) |
 | **prod** | PostgreSQL | `hr-user-pg12` | `5432` | `db_hr_user` | `none` | Conecta ao container Docker `hr-user-pg12` |
 
-### Atualização dinâmica com Actuator
+## Atualização dinâmica com Actuator
 
 Os serviços que possuem `@RefreshScope` (como `hr-worker`) podem ter suas configurações atualizadas em runtime:
 
@@ -271,9 +271,9 @@ POST http://localhost:8765/hr-worker/actuator/refresh
 
 ---
 
-## 🚀 Como Executar
+# 🚀 Como Executar
 
-### 📋 Pré-requisitos
+## 📋 Pré-requisitos
 
 | Ferramenta | Versão | Necessidade |
 |-----------|--------|-------------|
@@ -282,11 +282,11 @@ POST http://localhost:8765/hr-worker/actuator/refresh
 | **Docker** | 20.x+ | Necessário para profiles `dev`/`prod` com PostgreSQL |
 | **Postman** | Qualquer | Recomendado (collection inclusa em `docs/`) |
 
-### 🖥️ Execução Local (Profile Dev)
+## 🖥️ Execução Local (Profile Dev)
 
 Neste modo, os serviços `hr-worker` e `hr-user` que usam banco de dados podem se conectar a uma instância PostgreSQL local.
 
-#### 1. Subir os bancos PostgreSQL locais
+### 1. Subir os bancos PostgreSQL locais
 
 ```bash
 # Banco do hr-worker (porta 5432)
@@ -308,7 +308,7 @@ docker run -d \
   postgres:12-alpine
 ```
 
-#### 2. Inicializar os schemas
+### 2. Inicializar os schemas
 
 Após os containers estarem rodando, execute os scripts DDL + seed:
 
@@ -320,14 +320,14 @@ docker exec -i hr-worker-pg12-dev psql -U postgres -d db_hr_worker < hr-worker/c
 docker exec -i hr-user-pg12-dev psql -U postgres -d db_hr_user < hr-user/create.sql
 ```
 
-#### 3. Build do projeto
+### 3. Build do projeto
 
 ```bash
 # Na raiz do projeto
 mvn clean install -DskipTests
 ```
 
-#### 4. Iniciar os serviços (ordem importa!)
+### 4. Iniciar os serviços (ordem importa!)
 
 Os serviços devem ser iniciados na seguinte ordem para garantir que as dependências estejam disponíveis:
 
@@ -356,7 +356,7 @@ java -jar hr-api-gateway-zuul/target/hr-api-gateway-zuul-0.0.1-SNAPSHOT.jar
 
 > **💡 Dica:** No VS Code, use o arquivo [`docs/launch.json`](docs/launch.json) com as configurações de debug prontas para cada serviço. Copie-o para `.vscode/launch.json`.
 
-#### Sobrescrevendo o Config Server URI para desenvolvimento local
+### Sobrescrevendo o Config Server URI para desenvolvimento local
 
 Por padrão, os `bootstrap.properties` apontam para `http://hr-config-server:8888` (hostname Docker). Para rodar localmente, sobrescreva:
 
@@ -367,17 +367,17 @@ java -jar hr-worker/target/hr-worker-0.0.1-SNAPSHOT.jar \
   --eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
 ```
 
-### 🐳 Execução com Docker (Profile Prod)
+## 🐳 Execução com Docker (Profile Prod)
 
 Neste modo, todos os serviços rodam em containers Docker conectados por uma rede interna. Os hostnames dos containers substituem `localhost`.
 
-#### 1. Criar a rede Docker
+### 1. Criar a rede Docker
 
 ```bash
 docker network create hr-net
 ```
 
-#### 2. Build das imagens
+### 2. Build das imagens
 
 Antes de construir as imagens, faça o build Maven na raiz:
 
@@ -410,7 +410,7 @@ docker build -t hr-user:v1 ./hr-user
 docker build -t hr-oauth:v1 ./hr-oauth
 ```
 
-#### 3. Subir os bancos PostgreSQL (na rede Docker)
+### 3. Subir os bancos PostgreSQL (na rede Docker)
 
 ```bash
 # Banco do hr-worker
@@ -434,7 +434,7 @@ docker run -d \
   postgres:12-alpine
 ```
 
-#### 4. Inicializar os schemas no PostgreSQL
+### 4. Inicializar os schemas no PostgreSQL
 
 ```bash
 # Schema do hr-worker
@@ -444,7 +444,7 @@ docker exec -i hr-worker-pg12 psql -U postgres -d db_hr_worker < hr-worker/creat
 docker exec -i hr-user-pg12 psql -U postgres -d db_hr_user < hr-user/create.sql
 ```
 
-#### 5. Subir os containers (respeitar a ordem!)
+### 5. Subir os containers (respeitar a ordem!)
 
 ```bash
 # 1️⃣ Config Server
@@ -499,7 +499,7 @@ docker run -d \
 
 > **📌 Importante:** Os nomes dos containers (`--name`) devem coincidir com os hostnames configurados nos arquivos de propriedades (ex: `hr-config-server`, `hr-eureka-server`, `hr-worker-pg12`, `hr-user-pg12`).
 
-#### 6. Verificar se tudo está rodando
+### 6. Verificar se tudo está rodando
 
 ```bash
 # Verificar containers
@@ -512,7 +512,7 @@ docker ps
 # http://localhost:8888/hr-worker/default
 ```
 
-### 📊 Resumo de Portas Expostas
+## 📊 Resumo de Portas Expostas
 
 | Serviço | Porta Host | Porta Container | Acessível externamente? |
 |---------|-----------|----------------|------------------------|
@@ -528,9 +528,9 @@ docker ps
 
 ---
 
-## 🐘 Banco de Dados PostgreSQL
+# 🐘 Banco de Dados PostgreSQL
 
-### Configuração dos containers
+## Configuração dos containers
 
 Ambos os bancos utilizam a imagem `postgres:12-alpine`:
 
@@ -543,7 +543,7 @@ Ambos os bancos utilizam a imagem `postgres:12-alpine`:
 | **Porta Host (dev)** | `5432` | `5433` |
 | **Porta Host (prod)** | `5432` | `5433` |
 
-### Schema — `db_hr_worker`
+## Schema — `db_hr_worker`
 
 ```sql
 CREATE TABLE tb_worker (
@@ -559,7 +559,7 @@ INSERT INTO tb_worker (name, daily_income) VALUES ('Maria', 300.0);
 INSERT INTO tb_worker (name, daily_income) VALUES ('Alex', 250.0);
 ```
 
-### Schema — `db_hr_user`
+## Schema — `db_hr_user`
 
 ```sql
 CREATE TABLE tb_role (
@@ -596,9 +596,9 @@ INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);  -- Leia = ADMIN
 
 ---
 
-## 🔐 Autenticação e Autorização
+# 🔐 Autenticação e Autorização
 
-### Modelo de Segurança
+## Modelo de Segurança
 
 O sistema usa **OAuth2 com Password Grant** e tokens **JWT**:
 
@@ -616,14 +616,14 @@ graph LR
     end
 ```
 
-### Usuários de teste
+## Usuários de teste
 
 | Usuário | Email | Senha | Roles |
 |---------|-------|-------|-------|
 | Nina Brown | `nina@gmail.com` | `123456` | `ROLE_OPERATOR` |
 | Leia Red | `leia@gmail.com` | `123456` | `ROLE_OPERATOR`, `ROLE_ADMIN` |
 
-### Regras de acesso no Gateway
+## Regras de acesso no Gateway
 
 | Rota | Método | Role necessária |
 |------|--------|----------------|
@@ -634,7 +634,7 @@ graph LR
 | `/actuator/**` | Todos | `ADMIN` |
 | Demais rotas | Todos | Autenticado |
 
-### Exemplo de login via cURL
+## Exemplo de login via cURL
 
 ```bash
 # Obter token JWT
@@ -649,7 +649,7 @@ curl -H "Authorization: Bearer <TOKEN>" \
 
 ---
 
-## 📮 Collection Postman
+# 📮 Collection Postman
 
 O diretório [`docs/`](docs/) contém arquivos prontos para importar no Postman:
 
@@ -658,7 +658,7 @@ O diretório [`docs/`](docs/) contém arquivos prontos para importar no Postman:
 | [`postman-collection.json`](docs/postman-collection.json) | Collection com todos os endpoints organizados por serviço |
 | [`postman-environment.json`](docs/postman-environment.json) | Variáveis de ambiente (url-base, token, credentials) |
 
-### Variáveis de ambiente
+## Variáveis de ambiente
 
 | Variável | Descrição | Valor sugerido |
 |----------|-----------|---------------|
@@ -671,7 +671,7 @@ O diretório [`docs/`](docs/) contém arquivos prontos para importar no Postman:
 
 > **💡 Dica:** O request de **Login** no Postman possui um script de teste que salva automaticamente o `access_token` na variável `token` do environment.
 
-### Endpoints disponíveis
+## Endpoints disponíveis
 
 | Serviço | Endpoint | Método | Descrição |
 |---------|----------|--------|-----------|
@@ -689,9 +689,9 @@ O diretório [`docs/`](docs/) contém arquivos prontos para importar no Postman:
 
 ---
 
-## 🛠️ Configuração do VS Code
+# 🛠️ Configuração do VS Code
 
-### Supressão de avisos do Spring Boot
+## Supressão de avisos do Spring Boot
 
 Como este projeto utiliza uma versão mais antiga do Spring Boot para fins de aprendizado, a extensão **Spring Boot Tools** pode exibir avisos de versão desatualizada.
 
@@ -703,13 +703,13 @@ Crie ou configure o arquivo `.vscode/settings.json`:
 }
 ```
 
-### Launch Configurations
+## Launch Configurations
 
 Use o arquivo [`docs/launch.json`](docs/launch.json) como base para debug no VS Code. Copie-o para `.vscode/launch.json`. Ele contém configurações pré-definidas para cada microsserviço com portas JMX dedicadas.
 
 ---
 
-## 📂 Estrutura do Projeto
+# 📂 Estrutura do Projeto
 
 ```
 📦 curso-udemy-microsservicos-java-com-spring-boot-e-spring-cloud
